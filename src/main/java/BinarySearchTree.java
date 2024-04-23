@@ -70,8 +70,13 @@ class BinarySearchTree {
      */
     private int numOfNodesWithTwoChildren(BSTNode node) {
         // FILL IN CODE:
-
-        return 0; // change
+        if(node == null){
+            return 0;
+        }
+        if(node.left != null && node.right != null){
+            return 1 + numOfNodesWithTwoChildren(node.left) + numOfNodesWithTwoChildren(node.right);
+        }
+        return numOfNodesWithTwoChildren(node.left) + numOfNodesWithTwoChildren(node.right); // change
     }
 
     /**
@@ -84,15 +89,12 @@ class BinarySearchTree {
         // Find bug(s) in this incorrect and inefficient method
         // that was supposed to check if elem is in the tree
         // TODO: Fix bugs to make it work and make it efficient
-        BSTNode curr = root;
-        if (curr == null)
-            return false;
-        if (curr.data == elem)
-            return true ;
-        find(node.left, elem);
-        find(node.right, elem);
 
-        return false;
+        if (node == null)
+            return false;
+        if (node.data == elem)
+            return true ;
+        return find(node.left, elem) || find(node.right, elem);
     }
 
 
@@ -124,11 +126,10 @@ class BinarySearchTree {
         */
 
         // Uncomment to test the find method after fixing bugs:
-       /**
+
         System.out.println(tree.find(22)); // true
         System.out.println(tree.find(0)); // true
         System.out.println(tree.find(4)); // true
         System.out.println(tree.find(5)); // false
-        */
     }
 }
